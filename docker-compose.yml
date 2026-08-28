@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: kosmetikon-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: kosmetikon
+      POSTGRES_USER: kosmetikon_user
+      POSTGRES_PASSWORD: kosmetikon_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./database/create.sql:/docker-entrypoint-initdb.d/1-create.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kosmetikon_user -d kosmetikon"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: kosmetikon-backend
+    restart: unless-stopped
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: kosmetikon
+      DB_USER: kosmetikon_user
+      DB_PASSWORD: kosmetikon_pass
+      JWT_SECRET: un_secret_tres_long_et_aleatoire_a_changer
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: kosmetikon-frontend
+    restart: unless-stopped
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:

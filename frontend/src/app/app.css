@@ -1,0 +1,26 @@
+/* Styles globaux de l'application */
+
+:root {
+  --app-page-bg: #f4f7fb;
+  --app-surface: #ffffff;
+  --app-surface-alt: #f8fafc;
+  --app-border: #dfe7f2;
+  --app-text: #1d2a39;
+  --app-text-soft: #5d6b82;
+  --app-primary: #2f6fed;
+  --app-primary-hover: #214fb8;
+  --app-success: #0f766e;
+  --app-danger: #b42318;
+  --app-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: var(--app-page-bg);
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    min-height: auto;
+  }
+}

@@ -1,0 +1,127 @@
+:root {
+  --bg-page: #f4f7fb;
+  --bg-card: #ffffff;
+  --bg-soft: #edf3ff;
+  --bg-subtle: #f8fafc;
+  --border: #dfe7f2;
+  --border-strong: #cbd8eb;
+  --text: #182334;
+  --text-muted: #5d6b82;
+  --primary: #2f6fed;
+  --primary-dark: #214fb8;
+  --primary-soft: rgba(47, 111, 237, 0.12);
+  --success-bg: #ecfdf5;
+  --success-text: #0f766e;
+  --danger-bg: #fff1f2;
+  --danger-text: #b42318;
+  --warning-bg: #fff7ed;
+  --warning-text: #b45309;
+  --shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg-page);
+  color: var(--text);
+  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  line-height: 1.5;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+h1, h2, h3, h4, p {
+  margin-top: 0;
+}
+
+input,
+select,
+textarea {
+  color: var(--text);
+}
+
+button {
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  html, body {
+    font-size: 15px;
+  }
+}
+
+/* Global fallbacks to ensure component classes are visible even if styles are scoped */
+.btn-primary, .btn-secondary, .btn-link, .btn-icon, .btn-danger {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+  color: #fff !important;
+  padding: 12px 20px !important;
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: 0 12px 28px rgba(47,111,237,0.22) !important;
+}
+
+.btn-secondary {
+  background: #f8fafc !important;
+  color: var(--text) !important;
+  padding: 9px 14px !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: 10px !important;
+}
+
+.btn-link {
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  text-decoration: underline !important;
+  padding: 8px 10px !important;
+}
+
+.btn-icon { padding: 8px 12px !important; border-radius: 10px !important; }
+
+.materials-table { width: 100% !important; border-collapse: collapse !important; }
+.materials-table th, .materials-table td { padding: 12px 14px !important; }
+.materials-table thead th { background: var(--bg-subtle) !important; }
+
+.badge, .badge-active, .badge-inactive {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 10px !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+}
+.badge-active { background: var(--success-bg) !important; color: var(--success-text) !important; }
+.badge-inactive { background: var(--bg-soft) !important; color: var(--text-muted) !important; }
+
+/* Make inputs and filters clearly visible */
+.filters input, .filters select {
+  border: 1px solid var(--border-strong) !important;
+  background: var(--bg-card) !important;
+  padding: 10px 12px !important;
+}
+
+/* Accessibility: ensure buttons are visible on dark/light backgrounds */
+.btn-primary:disabled { opacity: 0.7 !important; cursor: not-allowed !important; }
+
+

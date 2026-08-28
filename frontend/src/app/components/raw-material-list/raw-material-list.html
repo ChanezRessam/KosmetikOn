@@ -1,0 +1,108 @@
+<div class="container">
+  <div class="header">
+    <h1>Raw materials</h1>
+    <button class="btn-primary" (click)="createNew()">+ New raw material</button>
+    <button class="btn-link" (click)="logout()">Logout</button>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <input
+      type="text"
+      placeholder="Search by name..."
+      [(ngModel)]="filterName"
+      (keyup.enter)="applyFilters()"
+    />
+    <input
+      type="text"
+      placeholder="Category..."
+      [(ngModel)]="filterCategory"
+      (keyup.enter)="applyFilters()"
+    />
+    <select [(ngModel)]="filterStatus">
+      <option value="">All statuses</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+    <button class="btn-secondary" (click)="applyFilters()">Filter</button>
+    <button class="btn-link" (click)="resetFilters()">Reset</button>
+  </div>
+
+  <!-- Error message -->
+  @if (errorMessage) {
+    <div class="alert alert-error">{{ errorMessage }}</div>
+  }
+
+  <!-- Loading -->
+  @if (loading && !hasLoaded) {
+    <div class="loading">Loading...</div>
+  }
+
+  <!-- Table -->
+  @if (!loading && materials.length > 0) {
+    <table class="materials-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Category</th>
+          <th>Unit</th>
+          <th>Quantity</th>
+          <th>Created on</th>
+          <th>Updated</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (material of materials; track material.id) {
+          <tr>
+            <td>{{ material.id }}</td>
+            <td>{{ material.name }}</td>
+            <td>{{ material.code }}</td>
+            <td>{{ material.category }}</td>
+            <td>{{ material.unit_of_measure }}</td>
+            <td>{{ material.quantity }}</td>
+            <td>{{ material.created_at | date:'yyyy-MM-dd' }}</td>
+            <td>{{ material.updated_at | date:'yyyy-MM-dd' }}</td>
+            <td>
+              <span class="badge" [class.badge-active]="material.status === 'active'" [class.badge-inactive]="material.status === 'inactive'">
+                {{ material.status === 'active' ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+            <td class="actions">
+              <button class="btn-icon" (click)="editMaterial(material.id)">Edit</button>
+              <button class="btn-icon btn-danger" (click)="confirmDelete(material)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button (click)="goToPage(page - 1)" [disabled]="page <= 1">Previous</button>
+      <span>Page {{ page }} / {{ totalPages }} ({{ total }} results)</span>
+      <button (click)="goToPage(page + 1)" [disabled]="page >= totalPages">Next</button>
+    </div>
+  }
+
+  @if (!loading && hasLoaded && materials.length === 0 && !errorMessage) {
+    <div class="empty-state">No raw materials found.</div>
+  }
+
+  <!-- Delete confirmation modal -->
+  @if (materialToDelete) {
+    <div class="modal-overlay" (click)="cancelDelete()">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <h3>Confirm deletion</h3>
+        <p>Are you sure you want to delete <strong>{{ materialToDelete.name }}</strong>? This action is irreversible.</p>
+        <div class="modal-actions">
+          <button class="btn-secondary" (click)="cancelDelete()">Cancel</button>
+          <button class="btn-danger" (click)="deleteConfirmed()">Delete</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

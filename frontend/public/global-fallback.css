@@ -1,0 +1,16 @@
+:root{--bg-page:#f4f7fb;--bg-card:#ffffff;--bg-soft:#edf3ff;--bg-subtle:#f8fafc;--border:#dfe7f2;--border-strong:#cbd8eb;--text:#182334;--text-muted:#5d6b82;--primary:#2f6fed;--primary-dark:#214fb8;--shadow-soft:0 8px 24px rgba(15,23,42,.08)}
+
+/* Global fallbacks to ensure component classes are visible even if styles are scoped */
+.btn-primary, .btn-secondary, .btn-link, .btn-icon, .btn-danger{display:inline-flex!important;align-items:center!important;justify-content:center!important;font-weight:600!important;cursor:pointer!important}
+.btn-primary{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%)!important;color:#fff!important;padding:12px 20px!important;border-radius:12px!important;border:none!important;box-shadow:0 12px 28px rgba(47,111,237,0.22)!important}
+.btn-secondary{background:#f8fafc!important;color:var(--text)!important;padding:9px 14px!important;border:1px solid var(--border-strong)!important;border-radius:10px!important}
+.btn-link{background:transparent!important;color:var(--text-muted)!important;text-decoration:underline!important;padding:8px 10px!important}
+.btn-icon{padding:8px 12px!important;border-radius:10px!important}
+.materials-table{width:100%!important;border-collapse:collapse!important}
+.materials-table th,.materials-table td{padding:12px 14px!important}
+.materials-table thead th{background:var(--bg-subtle)!important}
+.badge,.badge-active,.badge-inactive{display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:6px 10px!important;border-radius:999px!important;font-weight:700!important;font-size:.8rem!important}
+.badge-active{background:var(--success-bg,#ecfdf5)!important;color:var(--success-text,#0f766e)!important}
+.badge-inactive{background:var(--bg-soft,#edf3ff)!important;color:var(--text-muted,#5d6b82)!important}
+.filters input,.filters select{border:1px solid var(--border-strong)!important;background:var(--bg-card)!important;padding:10px 12px!important}
+.btn-primary:disabled{opacity:.7!important;cursor:not-allowed!important}
